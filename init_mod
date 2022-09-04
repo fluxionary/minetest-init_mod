@@ -1,0 +1,71 @@
+#!/usr/bin/env python3
+
+import argparse
+import datetime
+import getpass
+import os
+import pathlib
+import re
+import shutil
+
+our_path = pathlib.Path(os.path.realpath(__file__))
+
+
+def main(args):
+    mod_name = args.mod_name
+    current_date = datetime.date.today()
+    format_data = {
+        'mod_name': mod_name,
+        'author': args.author,
+        'year': current_date.year,
+        'version': f'{{year = {current_date.year}, month = {current_date.month}, day = {current_date.day}}}',
+    }
+
+    mod_path = pathlib.Path(os.getcwd()) / mod_name
+
+    mod_path.mkdir(parents=True, exist_ok=True)
+
+    for child in (our_path / 'static_files').iterdir():
+        if child.is_file():
+            shutil.copyfile(child, mod_path / child.name)
+
+    p = re.compile(r'^(.*)\.format')
+    for child in (our_path / 'templates').iterdir():
+        if child.is_file():
+            contents = child.read_text()
+            contents.format(format_data)
+            dest_name = p.sub(r'\1', child.name)
+            dest = mod_path / dest_name
+            dest.write_text(contents)
+
+    license_path = our_path / 'choice_files' / f'LICENSE.txt.{args.license}.format'
+    contents = license_path.read_text()
+    contents.format(format_data)
+    dest = mod_path / 'LICENSE.txt'
+    dest.write_text(contents)
+
+
+def get_choices(base_name):
+    choices = []
+    p = re.compile(f'^{base_name}.(.*).format$')
+
+    for file in (our_path / 'choice_files').iterdir():
+        m = p.match(file.name)
+        if m:
+            choices.append(m.group(1))
+
+    return choices
+
+
+def parse_args(argv, namespace):
+    licenses = get_choices('LICENSE.txt')
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument('mod_name')
+    parser.add_argument('--author', '-a', default=getpass.getuser())
+    parser.add_argument('--license', '-l', choices=licenses, default='AGPL_v3')
+    return parser.parse_args(argv, namespace)
+
+
+if __name__ == '__main__':
+    main(parse_args())

@@ -7,6 +7,7 @@ import os
 import pathlib
 import re
 import shutil
+import subprocess
 
 our_path = pathlib.Path(os.path.realpath(__file__)).parent
 
@@ -30,6 +31,9 @@ def main(args):
         if child.is_file():
             shutil.copyfile(child, mod_path / child.name)
 
+        elif child.is_dir():
+            shutil.copytree(child, mod_path / child.name)
+
     p = re.compile(r'^(.*)\.format')
     for child in (our_path / 'templates').iterdir():
         if child.is_file():
@@ -49,6 +53,9 @@ def main(args):
     contents.format(**format_data)
     dest = mod_path / 'LICENSE.txt'
     dest.write_text(contents)
+
+    subprocess.run(["git", "init"], cwd=mod_path)
+    subprocess.run(["pre-commit", "install"], cwd=mod_path)
 
 
 def get_choices(base_name):

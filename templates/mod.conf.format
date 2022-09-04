@@ -1,4 +1,4 @@
 name = {mod_name}
 description = hello, can you tell me what i am?
-author = {author_name}
-license = {license_name}
+author = {author}
+license = {license}

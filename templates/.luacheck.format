@@ -2,8 +2,8 @@ std = "lua51+luajit+minetest+{mod_name}"
 unused_args = false
 max_line_length = 120
 
-stds.minetest = {
-	read_globals = {
+stds.minetest = {{
+	read_globals = {{
 		"DIR_DELIM",
 		"minetest",
 		"core",
@@ -18,14 +18,14 @@ stds.minetest = {
 		"table",
 		"math",
 		"string",
-	}
-}
+	}}
+}}
 
-stds.{mod_name} = {
-	globals = {
+stds.{mod_name} = {{
+	globals = {{
 		"{mod_name}",
-	},
-	read_globals = {
+	}},
+	read_globals = {{
 		"minetest",
-	},
-}
+	}},
+}}

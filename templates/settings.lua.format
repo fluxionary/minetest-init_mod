@@ -1,4 +1,4 @@
 local s = minetest.settings
 
-{mod_name}.settings = {
-}
+{mod_name}.settings = {{
+}}

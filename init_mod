@@ -38,21 +38,14 @@ def main(args):
     for child in (our_path / 'templates').iterdir():
         if child.is_file():
             contents = child.read_text()
-
-            try:
-                contents.format(**format_data)
-            except KeyError:
-                raise Exception(f'{child}')
-
             dest_name = p.sub(r'\1', child.name)
             dest = mod_path / dest_name
-            dest.write_text(contents)
+            dest.write_text(contents.format(**format_data))
 
     license_path = our_path / 'choice_files' / f'LICENSE.txt.{args.license}.format'
     contents = license_path.read_text()
-    contents.format(**format_data)
     dest = mod_path / 'LICENSE.txt'
-    dest.write_text(contents)
+    dest.write_text(contents.format(**format_data))
 
     subprocess.run(["git", "init"], cwd=mod_path)
     subprocess.run(["pre-commit", "install"], cwd=mod_path)

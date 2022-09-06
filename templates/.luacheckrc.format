@@ -26,6 +26,5 @@ stds.{mod_name} = {{
 		"{mod_name}",
 	}},
 	read_globals = {{
-		"minetest",
 	}},
 }}

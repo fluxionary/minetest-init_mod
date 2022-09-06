@@ -2,7 +2,4 @@
     "type": "MOD",
     "title": "{mod_name}",
     "short_description": "hello, can you tell me what i am?",
-    "dev_state": "WIP",
-    "license": "{license}",
-    "media_license": "{license}"
 }}

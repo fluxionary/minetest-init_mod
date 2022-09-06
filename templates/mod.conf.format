@@ -1,4 +1,6 @@
 name = {mod_name}
+title = {mod_name}
 description = hello, can you tell me what i am?
 author = {author}
 license = {license}
+min_minetest_version = 5.6.0

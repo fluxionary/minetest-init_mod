@@ -22,7 +22,7 @@ jobs:
         run: sudo apt-get install -y cargo
 
       - name: install stylua
-        run: cargo install --path "$HOME/.luarocks/bin" stylua
+        run: cargo install stylua
 
       - name: Install pre-commit
         run: pip3 install pre-commit

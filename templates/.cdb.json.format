@@ -2,12 +2,10 @@
     "type": "MOD",
     "name": "{mod_name}",
     "title": "{mod_name}",
-    "dev_state": "BETA",
-    "tags": "",
-    "license": "AGPL-3.0-or-later",
-    "media_license": "CC-BY-SA-4.0",
+    "license": "{license}",
+    "media_license": "{media_license}",
     "repo": "https://github.com/fluxionary/minetest-{mod_name}.git",
     "website": "https://github.com/fluxionary/minetest-{mod_name}",
     "issue_tracker": "https://github.com/fluxionary/minetest-{mod_name}/issues",
-    "short_description": "hello, can you tell me what i am?",
+    "short_description": "hello, can you tell me what i am?"
 }}

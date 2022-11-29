@@ -14,7 +14,7 @@ our_path = pathlib.Path(os.path.realpath(__file__)).parent
 
 def main(args):
     mod_name = args.mod_name
-    current_date = datetime.date.today()
+    current_date = datetime.datetime.datetime(tz=datetime.timezone.utc)
     format_data = {
         'mod_name': mod_name,
         'author': args.author,
@@ -48,6 +48,11 @@ def main(args):
     dest = mod_path / 'LICENSE.txt'
     dest.write_text(contents.format(**format_data))
 
+    media_license_path = our_path / 'choice_files' / f'MEDIA_LICENSE.txt.{args.license}.format'
+    contents = media_license_path.read_text()
+    dest = mod_path / 'MEDIA_LICENSE.txt'
+    dest.write_text(contents.format(**format_data))
+
     subprocess.run(["git", "init"], cwd=mod_path)
     subprocess.run(["pre-commit", "install"], cwd=mod_path)
 
@@ -70,7 +75,8 @@ def parse_args(argv=None, namespace=None):
     parser = argparse.ArgumentParser()
     parser.add_argument('mod_name')
     parser.add_argument('--author', '-a', default=getpass.getuser())
-    parser.add_argument('--license', '-l', choices=licenses, default='AGPL_v3')
+    parser.add_argument('--license', '-l', choices=licenses, default='AGPL-3.0-or-later')
+    parser.add_argument('--media_license', '-m', choices=licenses, default='CC-BY-SA-4.0')
     return parser.parse_args(argv, namespace)
 
 

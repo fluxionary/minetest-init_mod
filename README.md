@@ -56,7 +56,32 @@ have special right-click behavior, and some nodes (and entities) have their own 
 there is often no way to tell a priori which is the correct behavior to trigger in every circumstance. 
 for example, tools with right-click behavior may not place on an anvil, preventing them from being repaired.
 
-integration mods are often very server-specific and thus are often not fully public.
+however, integration mods are often very server-specific and thus are often not fully public, in part because they
+aren't incredibly useful to the public. 
+
+## how to use these semantics
+
+* API mods can depend on other API mods, but most not depend on content or integration mods.
+* content mods can depend on API mods or other content mods, but must not depend on integration mods.
+* integration mods can depend on everything. nothing other than another integration mod should depend on an 
+    integration mod.
+
+## some case studies
+
+i will analyze some current issues
+
+### i3
+
+i must disclose that i have inadvertently started a "beef" w/ the creator of i3, and i regret having done so w/out
+having documented my views beforehand. i3 has at least one great feature over unified_inventory (compressed groups),
+but it does a huge number of things that break other mods, and there's no way to uninstall it and not suffer from 
+permanent side effects more serious than an "unknown node".
+
+TODO: explain
+
+### ethereal
+
+TODO: 
 
 ## license
 

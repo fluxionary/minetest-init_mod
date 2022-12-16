@@ -53,13 +53,13 @@ def main(args):
     dest = mod_path / 'MEDIA_LICENSE.txt'
     dest.write_text(contents.format(**format_data))
 
-    subprocess.run(["git", "init"], cwd=mod_path)
-    subprocess.run(["pre-commit", "install"], cwd=mod_path)
+    subprocess.run('git init'.split(), cwd=mod_path)
+    subprocess.run('pre-commit install'.split(), cwd=mod_path)
 
 
 def get_choices(base_name):
     choices = []
-    p = re.compile(f'^{base_name}.(.*).format$')
+    p = re.compile(fr'^{base_name}\.(.*)\.format$')
 
     for file in (our_path / 'choice_files').iterdir():
         m = p.match(file.name)

@@ -14,7 +14,7 @@ our_path = pathlib.Path(os.path.realpath(__file__)).parent
 
 def main(args):
     mod_name = args.mod_name
-    current_date = datetime.datetime.datetime(tz=datetime.timezone.utc)
+    current_date = datetime.datetime.now(tz=datetime.timezone.utc)
     format_data = {
         'mod_name': mod_name,
         'author': args.author,
@@ -22,6 +22,7 @@ def main(args):
         'version': f'{{year = {current_date.year}, month = {current_date.month}, day = {current_date.day}}}',
         'version_short': f'{current_date.year}-{current_date.month:02}-{current_date.day:02}',
         'license': args.license,
+        'media_license': args.media_license,
     }
 
     mod_path = pathlib.Path(os.getcwd()) / mod_name
@@ -48,7 +49,7 @@ def main(args):
     dest = mod_path / 'LICENSE.txt'
     dest.write_text(contents.format(**format_data))
 
-    media_license_path = our_path / 'choice_files' / f'MEDIA_LICENSE.txt.{args.license}.format'
+    media_license_path = our_path / 'choice_files' / f'MEDIA_LICENSE.txt.{args.media_license}.format'
     contents = media_license_path.read_text()
     dest = mod_path / 'MEDIA_LICENSE.txt'
     dest.write_text(contents.format(**format_data))

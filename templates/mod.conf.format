@@ -1,7 +1,7 @@
 name = {mod_name}
 title = {mod_name}
-description = hello, can you tell me what i am?
-url = https://content.minetest.net/packages/rheo/{mod_name}/
+description = TODO: write a description
+website = https://content.minetest.net/packages/rheo/{mod_name}/
 author = {author}
 license = {license}
 media_license = {media_license}

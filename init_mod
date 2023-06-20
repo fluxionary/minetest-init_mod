@@ -76,7 +76,7 @@ def parse_args(argv=None, namespace=None):
     parser = argparse.ArgumentParser()
     parser.add_argument('mod_name')
     parser.add_argument('--author', '-a', default=getpass.getuser())
-    parser.add_argument('--license', '-l', choices=licenses, default='AGPL-3.0-or-later')
+    parser.add_argument('--license', '-l', choices=licenses, default='LGPL-3.0-or-later')
     parser.add_argument('--media_license', '-m', choices=licenses, default='CC-BY-SA-4.0')
     return parser.parse_args(argv, namespace)
 
